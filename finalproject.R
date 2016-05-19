@@ -1,0 +1,17 @@
+fitlin <- lm(am ~ mpg, mtcars)
+fitlin2 <- lm(mpg ~ factor(am), mtcars)
+fitlog <- glm(am ~ mpg, family='binomial', mtcars)
+fitpos <- glm(am ~ mpg, family='poisson', mtcars)
+
+p <- xtabs(~ am + mpg, mtcars)
+old.par <- par(mfrow=c(1, 1))
+
+plot(mtcars$mpg, fitlog$fitted, pch=19, col='blue', xlab='MPG', ylab="Prob of Automatic")
+grid(length(mtcars$mpg), length(mtcars$am))
+points(mtcars$mpg, mtcars$am, pch=1, lwd=1)
+abline(fitlog, lwd=2)
+curve(predict(fitlin, data.frame(mpg=x), type='resp'), col="red", lwd=2, add=TRUE)
+curve(predict(fitlog, data.frame(mpg=x), type="resp"), col='orange', lwd=2, add=TRUE)
+curve(predict(fitpos, data.frame(mpg=x), type='resp'), col='green', lwd=2, add=TRUE)
+legnames = c('log reg line', 'linear pred', 'logistic pred', 'pois pred')
+legend('bottomright', legnames, lty=1, col=c('black', 'red', 'orange', 'green'), bty='n', cex=1)
