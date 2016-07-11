@@ -1,1 +1,0 @@
-# centimeters = 1/100 of a meter, so multiply by 100 to get normalize for meters
