@@ -1,1 +1,0 @@
-# The sum of the residuals always equal zero.
